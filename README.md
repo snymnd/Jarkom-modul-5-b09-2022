@@ -281,10 +281,10 @@ dan yang tidak jalan
 ## No.4
 Menambahkan Peraturan pada IPtables sehingga hanya dapat diakses pada 
 ```
-iptables -A OUTPUT -s 192.177.7.74/29 -m time --timestart 07:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
-iptables -A OUTPUT -s 192.177.7.75/29 -m time --timestart 07:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
-iptables -A OUTPUT -s 192.177.7.74/29 -j REJECT
-iptables -A OUTPUT -s 192.177.7.75/29 -j REJECT
+iptables -A INPUT -s 192.177.7.0/25,192.177.0.0/22 -m time --timestart 07:00 --timestop 16:00 --weekdays Mon,Tue,Wed,Thu,Fri -j ACCEPT
+iptables -A INPUT -s 192.177.7.0/25,192.177.0.0/22 -m time --timestart 16:01 --timestop 00:00 --weekdays Mon,Tue,Wed,Thu,Fri -j DROP
+iptables -A INPUT -s 192.177.7.0/25,192.177.0.0/22 -m time --timestart 00:01 --timestop 06:59 --weekdays Mon,Tue,Wed,Thu,Fri -j DROP
+iptables -A INPUT -s 192.177.7.0/25,192.177.0.0/22 -m time --weekdays Sun,Sat -j DROP
 ```
 
 Sehingga ketika diakses pada jam tersebut,maka bisa ping ke DHCP Server
